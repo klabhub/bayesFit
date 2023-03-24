@@ -1,7 +1,6 @@
 % Example code to sample tuning curves from simulated data...
 
-opts.TOOLBOX_HOME=fileparts(which('tc_sample'));
-addpath(opts.TOOLBOX_HOME);
+
 
 %% Create simulated data
 

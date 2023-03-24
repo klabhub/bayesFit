@@ -12,39 +12,17 @@ function S=tc_sample(x,y,tc_func_name,prob_model_name,opts)
 %                  'negative_binomial', 'add_normal', 'mult_normal'
 % opts             Other options
 
-if ~isfield(opts,'TOOLBOX_HOME')
-    error('opts.TOOLBOX_HOME is not set!');
-elseif ~exist(opts.TOOLBOX_HOME,'dir')
-    error('TOOLBOX_HOME folder %s does not exist on your system',opts.TOOLBOX_HOME);
-end
 
-fid=fopen('jar_list.txt');
-temp=textscan(fid,'%s');
-fclose(fid);
-temp=temp{1};
-jar_list=cell(1,length(temp));
-for i=1:length(temp)    
-    jar_list{i}=fullfile(opts.TOOLBOX_HOME,'lib',temp{i});
-end
-javaclasspath(jar_list);
+addJava;
 
-
-% Importing the classes to use
-fid=fopen('import_list.txt');
-temp=textscan(fid,'%s');
-fclose(fid);
-temp=temp{1};
-for i=1:length(temp)
-    import(temp{i});
-end
+% Import Java
+import edu.mit.bcs.bayesphys.models.tc.*
+import edu.mit.bcs.bayesphys.models.util.*
 
 % Set up default options
-if nargin == 4
-    opts={};
+if nargin < 5
+    opts= struct('burnin_samples',5000,'num_samples',10000,'sample_period',100);
 end
-if ~isfield(opts,'burnin_samples'); opts.burnin_samples=5000; end
-if ~isfield(opts,'num_samples'); opts.num_samples=10000; end
-if ~isfield(opts,'sample_period'); opts.sample_period=100; end
 
 
 % Create the model
@@ -240,14 +218,9 @@ S.log_post=S.log_prior+S.log_llhd;
 
 
 function setup_prior(sdk, paramnum, priortype, initval, hp1, hp2, opts)
-
-fid=fopen('import_list.txt');
-temp=textscan(fid,'%s');
-fclose(fid);
-temp=temp{1};
-for i=1:length(temp)
-    import(temp{i});
-end
+% Import Java
+import edu.mit.bcs.bayesphys.models.tc.*
+import edu.mit.bcs.bayesphys.models.util.*
 
 if isfield(opts,'prior')
     if paramnum <= length(opts.prior) && ~isempty(opts.prior(paramnum).type)

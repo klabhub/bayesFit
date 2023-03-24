@@ -1,6 +1,4 @@
 % Model Comparison Example...
-opts.TOOLBOX_HOME=fileparts(which('tc_sample'));
-addpath(opts.TOOLBOX_HOME);
 
 % Data Model
 params = [1 4 90 20 2];
