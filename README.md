@@ -1,21 +1,22 @@
 # bayesPhys
 
-This is the bayesPhys package created by Ian Stevenson and Beau Cronin and published in 2010. 
+This is the bayesPhys package created by Ian Stevenson and Beau Cronin and published in 2010.
 
 This code package performs fully Bayesian estimation of parametric tuning curves with various noise models, and contains examples for model comparison and hypothesis testing. It accompanies the following paper:
 
 Hierarchical Bayesian modeling and Markov chain Monte Carlo sampling for tuning curve analysis (2010)
 Cronin B*, Stevenson IH*, Sur M, and Körding KP. Journal of Neurophysiology 103: 591-602.
-http://jn.physiology.org/cgi/content/abstract/103/1/591
+<http://jn.physiology.org/cgi/content/abstract/103/1/591>
 
+Wrapped in a GitHub repository and updated with a few cosmetic changes to avoid namespace issues by Bart Krekelberg.
 
-Wrapped in a GitHub repository and updated with a few cosmetic changes to avoid namespace issues by Bart Krekelberg. 
 ## Installation
 
 1. Clone the repository from GitHub to a folder (e.g., ```'c:/github/bayesPhys'```)
 2. Add the folder to your Matlab path (```addpath('c:/github/bayesPhys')```)
 
 ## Test
+
 On the Matlab Command line, go to the test folder (```cd c:/github/bayesPhys/test```)
 
 1. Tuning Curve Estimation.
