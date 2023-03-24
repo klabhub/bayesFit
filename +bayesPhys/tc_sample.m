@@ -12,7 +12,8 @@ function S=tc_sample(x,y,tc_func_name,prob_model_name,opts)
 %                  'negative_binomial', 'add_normal', 'mult_normal'
 % opts             Other options
 
-
+% Add the bayesPhys package
+import bayesPhys.*
 addJava;
 
 % Import Java

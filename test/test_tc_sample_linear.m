@@ -1,6 +1,5 @@
 % Example code to sample tuning curves from simulated data...
-
-
+import bayesPhys.*
 
 %% Create simulated data
 

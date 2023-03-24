@@ -1,5 +1,5 @@
 % Model Comparison Example...
-
+import bayesPhys.*
 % Data Model
 params = [1 4 90 20 2];
 

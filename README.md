@@ -1,6 +1,6 @@
 # bayesPhys
 
-This is the bayesPhys package created by Ian Stevenson and Beau Cronin and published in 2010. BK only added packaging.
+This is the bayesPhys package created by Ian Stevenson and Beau Cronin and published in 2010. 
 
 This code package performs fully Bayesian estimation of parametric tuning curves with various noise models, and contains examples for model comparison and hypothesis testing. It accompanies the following paper:
 
@@ -8,13 +8,21 @@ Hierarchical Bayesian modeling and Markov chain Monte Carlo sampling for tuning 
 Cronin B*, Stevenson IH*, Sur M, and Körding KP. Journal of Neurophysiology 103: 591-602.
 http://jn.physiology.org/cgi/content/abstract/103/1/591
 
-## USE
+
+Wrapped in a GitHub repository and updated with a few cosmetic changes to avoid namespace issues by Bart Krekelberg. 
+## Installation
+
+1. Clone the repository from GitHub to a folder (e.g., ```'c:/github/bayesPhys'```)
+2. Add the folder to your Matlab path (```addpath('c:/github/bayesPhys')```)
+
+## Test
+On the Matlab Command line, go to the test folder (```cd c:/github/bayesPhys/test```)
 
 1. Tuning Curve Estimation.
-Open the script 'test_tc_sample.m' and run. This script contains code for estimating the parameters of a circular gaussian tuning curve from simulated data (see Fig 2B and Fig 3 in the paper). Code for estimating a cosine tuning curve is commented out (lines 9-12).
+Run the script ```'test_tc_sample.m'```. This script contains code for estimating the parameters of a circular gaussian tuning curve from simulated data (see Fig 2B and Fig 3 in the paper). Code for estimating a cosine tuning curve is commented out (lines 9-12).
 2. Model Comparison
-The script 'test_tc_hypothesistest' contains code for reproducing Fig 7 from the paper.
-3. Additional tuning curve functions and noise models are described in 'tc_sample.m' and the Supplementary Material for the paper.
+The script ```'test_tc_hypothesistest'``` contains code for reproducing Fig 7 from the paper.
+3. Additional tuning curve functions and noise models are described in ```'tc_sample.m'``` and the Supplementary Material for the paper.
 
 ## Versions
 
