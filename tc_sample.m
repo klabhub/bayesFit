@@ -237,6 +237,8 @@ S.log_prior=WalkUtils.getPriorValues(observer);
 S.log_llhd=WalkUtils.getLlhdValues(observer);
 S.log_post=S.log_prior+S.log_llhd;
 
+
+
 function setup_prior(sdk, paramnum, priortype, initval, hp1, hp2, opts)
 
 fid=fopen('import_list.txt');
