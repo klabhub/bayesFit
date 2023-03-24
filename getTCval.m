@@ -13,7 +13,10 @@ switch lower(tc_func_name)
    case 'linear'
         y = params(1) + params(2)*x;
    case 'gaussian'
-        y = params(1) + params(2) * exp(-(x-params(3)).^2 ./ (2*params(4).^2));
+        [nrSets,~,nrCells]= size(params);
+        nrX= length(x);
+        y = (repmat(params(:,1,:),[1 nrX 1]) + repmat(params(:,2,:),[1 nrX 1]) .* exp(-(repmat(x(:)',[nrSets 1 nrCells])-repmat(params(:,3,:),[1 nrX 1])).^2 ./ (2*repmat(params(:,4,:),[1 nrX 1]).^2)));
+        y = permute(y,[2 1 3]);
    case 'circular_gaussian_360'
         y = cg(x,params(1),params(2),params(3),params(4),360);
    case 'circular_gaussian_180'
@@ -27,7 +30,7 @@ switch lower(tc_func_name)
    case 'positivecosine'
         y = max(0,params(1) + params(2)*cos(params(4)*(x-params(3))));
 %         y = params(1) + params(2)*cos(params(4)*(x-params(3)));
-    case 'log_normal'
+    case 'loggaussian'
         y = params(1) + params(2)*exp(-log((x+params(5))/(params(3)+params(5))).^2/2/params(4)^2);
    otherwise
        error(['The TC function ',tc_func_name,' is not recognized']);

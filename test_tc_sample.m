@@ -1,32 +1,31 @@
 % Example code to sample tuning curves from simulated data...
 
-opts.TOOLBOX_HOME=pwd;
+opts.TOOLBOX_HOME= fileparts(which('tc_sample'));
 addpath(genpath(opts.TOOLBOX_HOME));
 
 %% Create simulated data
 
 % M1 Example
-params = [20 10 pi+pi/180*20 1];
-tc_func_name = 'positiveCosine';
-noise_model_name = 'poisson';
-x0 = linspace(0,2*pi,9);   % Direction in radians
-x0 = x0(1:end-1);
+% params = [20 10 pi 1];
+% tc_func_name = 'positiveCosine';
+% noise_model_name = 'poisson';
+% x0 = linspace(0,2*pi,10);   % Direction in radians
 
 % V1 Example
-% params = [1 4 90 20];
-% tc_func_name = 'circular_gaussian_180';
-% noise_model_name = 'poisson';
-% x0 = linspace(0,179,10);  % Direction in degrees
+params = [1 4 90 20];
+tc_func_name = 'circular_gaussian_180';
+noise_model_name = 'poisson';
+x0 = linspace(0,179,10);  % Direction in degrees
 
-tr=5;
+tr=20;
 x=reshape(repmat(x0,[tr 1]), [length(x0)*tr 1]);    
 v=getTCval(x,tc_func_name,params);
 y=poissrnd(v);
-
+%%
 clf;
 plot(x+randn(size(y))*mean(diff(x0))/10,y,'.k');
 hold on
-x1 = linspace(0,2*pi,1000);
+x1 = linspace(min(x0),max(x0),1000);
 plot(x1,getTCval(x1,tc_func_name,params),'k')
 title('Simulated Data')
 xlabel('Direction (Jittered)')
@@ -68,3 +67,4 @@ legend([h0(1); h1; h3],{'Samples','Median','True'})
 hold off
 axis tight
 title('Posterior Samples')
+

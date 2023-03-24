@@ -1,6 +1,6 @@
 % Example code to sample tuning curves from simulated data...
 
-opts.TOOLBOX_HOME=pwd;
+opts.TOOLBOX_HOME=fileparts(which('tc_sample'));
 addpath(genpath(opts.TOOLBOX_HOME));
 
 %% Create simulated data
@@ -8,7 +8,7 @@ addpath(genpath(opts.TOOLBOX_HOME));
 % Log-Normal Example
 params = [1 1 2 0.5 1];
 % y = params(1) + params(2)*exp(-log((x+params(5))/(params(3)+params(5))).^2/2/params(4)^2);
-tc_func_name = 'log_normal';
+tc_func_name = 'loggaussian';
 noise_model_name = 'add_normal';
 x0 = linspace(0,10,20);   % Scale
 x0 = x0(1:end-1);

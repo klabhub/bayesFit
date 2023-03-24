@@ -14,24 +14,26 @@ function S=tc_sample(x,y,tc_func_name,prob_model_name,opts)
 
 if ~isfield(opts,'TOOLBOX_HOME')
     error('opts.TOOLBOX_HOME is not set!');
+elseif ~exist(opts.TOOLBOX_HOME,'dir')
+    error('TOOLBOX_HOME folder %s does not exist on your system',opts.TOOLBOX_HOME);
 end
-TOOLBOX_HOME=opts.TOOLBOX_HOME;
-% addpath(genpath([TOOLBOX_HOME,'/matlab']));
+
 fid=fopen('jar_list.txt');
 temp=textscan(fid,'%s');
 fclose(fid);
 temp=temp{1};
-jar_list={};
-for i=1:length(temp)
-    jar_list{i}=[TOOLBOX_HOME,'\lib\',temp{i}];
+jar_list=cell(1,length(temp));
+for i=1:length(temp)    
+    jar_list{i}=fullfile(opts.TOOLBOX_HOME,'lib',temp{i});
 end
 javaclasspath(jar_list);
 
+
+% Importing the classes to use
 fid=fopen('import_list.txt');
 temp=textscan(fid,'%s');
 fclose(fid);
 temp=temp{1};
-import_list={};
 for i=1:length(temp)
     import(temp{i});
 end
@@ -40,9 +42,9 @@ end
 if nargin == 4
     opts={};
 end
-if ~isfield(opts,'burnin_samples') opts.burnin_samples=5000; end;
-if ~isfield(opts,'num_samples') opts.num_samples=10000; end;
-if ~isfield(opts,'sample_period') opts.sample_period=100; end;
+if ~isfield(opts,'burnin_samples'); opts.burnin_samples=5000; end
+if ~isfield(opts,'num_samples'); opts.num_samples=10000; end
+if ~isfield(opts,'sample_period'); opts.sample_period=100; end
 
 
 % Create the model
@@ -166,7 +168,7 @@ switch lower(tc_func_name)
         %        setup_prior(sdk,2,'uniform',spread,0,2*spread,opts);
         %        setup_prior(sdk,3,'uniform',90,0,180,opts);
         %        setup_prior(sdk,4,'uniform',1,1,1,opts); % freq
-    case 'log_normal'
+    case 'loggaussian'
         TCModelUtils.configureTCFunc(sdk, 'LogGaussian');
         TCModelUtils.setupParameterWithUniformPrior(sdk,1,mean(y),min_y-spread,max_y+spread);
         TCModelUtils.setupParameterWithUniformPrior(sdk,2,spread,0,2*spread);
@@ -183,13 +185,13 @@ TCModelUtils.addData(sdk, x, y);
 
 % Perform burnin and sampling
 burninEngine = WalkUtils.burninWalk(sdk, opts.burnin_samples);
-disp('Burnin');
+%disp('Burnin');
 burninEngine.go();
 sdk=burninEngine.getSDK();
 
 observer = WalkUtils.attachObserver(sdk, opts.sample_period);
 samplingEngine = WalkUtils.samplingWalk(sdk, opts.num_samples);
-disp('Sampling');
+%disp('Sampling');
 samplingEngine.go();
 sdk=samplingEngine.getSDK();
 
@@ -241,13 +243,12 @@ fid=fopen('import_list.txt');
 temp=textscan(fid,'%s');
 fclose(fid);
 temp=temp{1};
-import_list={};
 for i=1:length(temp)
     import(temp{i});
 end
 
 if isfield(opts,'prior')
-    if paramnum <= length(opts.prior) & ~isempty(opts.prior(paramnum).type)
+    if paramnum <= length(opts.prior) && ~isempty(opts.prior(paramnum).type)
         priortype=opts.prior(paramnum).type;
         hp1=opts.prior(paramnum).hp1;
         hp2=opts.prior(paramnum).hp2;
