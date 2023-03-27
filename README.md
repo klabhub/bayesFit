@@ -31,7 +31,7 @@ The script ```'test_tc_hypothesistest'``` contains code for reproducing Fig 7 fr
 
 ## Adding additional tuning curves
 
-Based on an email from ian.h.stevenson@gmail.com, one of the authors.
+Based on an email from Ian Stevenson, one of the authors.
 
 If you want to add more tuning curves the way to do it is as follows. Rather than compiling the entire package, I've just been compiling the tuning curve components.
 
