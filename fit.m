@@ -1,4 +1,4 @@
-function results= bayesFit(x,y,pv)
+function results= fit(x,y,pv)
 % Use Hierarchical Bayes model and Markov Chain Monte Carlo Sampling for
 % Tuning Curve analysis. This function relies on the bayesphys_v1 toolbox,
 % the ideas and math behind this approach is described in
@@ -33,19 +33,19 @@ arguments
         'circular_gaussian_360','circular_gaussian_180', ...
         'direction_selective_circular_gaussian',...
         'sigmoid','velocity_tuning_1','rectifiedcosine', ...
-        'positivecosine','loggaussian'})}
+        'positivecosine','loggaussian'})} 
     pv.compare {mustBeMember(pv.compare,{'constant','linear','gaussian',...
         'circular_gaussian_360','circular_gaussian_180','direction_selective_circular_gaussian',...
         'sigmoid','velocity_tuning_1','rectifiedcosine', ...
-        'positivecosine','loggaussian'})}
-    pv.probabilityModel {mustBeMember(pv.probabilityModel,{'poisson','negative_binomial','add_normal','mult_normal'})}
+        'positivecosine','loggaussian'})} = 'constant'
+    pv.probabilityModel {mustBeMember(pv.probabilityModel,{'poisson','negative_binomial','add_normal','mult_normal'})} ='add_normal'
     pv.opts (1,1) struct = struct('burnin_samples',5000,'num_samples',5000,'sample_period',50)
     pv.graphics(1,1) logical = true
     pv.outlierRemoval {mustBeMember(pv.outlierRemoval,{'none','median','mean','quartiles','grubbs','gesd'})} = 'none';
 end
 tbx = which('bayesPhys.tc_sample');
 if isempty(tbx)
-    error('This function needs the bayesPhys toolbox.');
+    error('This function needs the bayesFit toolbox (https://github.com/klabhub/bayesFit).');
 end
 if ~strcmpi(pv.outlierRemoval,"none")
      io = isoutlier(y,pv.outlierRemoval);
