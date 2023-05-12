@@ -1,6 +1,6 @@
-# bayesPhys
+# bayesFit
 
-This is the bayesPhys package created by Ian Stevenson and Beau Cronin and published in 2010.
+This is a Git repository for the bayesPhys package created by Ian Stevenson and Beau Cronin and published in 2010.
 
 This code package performs fully Bayesian estimation of parametric tuning curves with various noise models, and contains examples for model comparison and hypothesis testing. It accompanies the following paper:
 
@@ -12,12 +12,13 @@ Wrapped in a GitHub repository and updated with a few cosmetic changes to avoid 
 
 ## Installation
 
-1. Clone the repository from GitHub to a folder (e.g., ```'c:/github/bayesPhys'```)
-2. Add the folder to your Matlab path (```addpath('c:/github/bayesPhys')```)
+1. Clone the repository from GitHub to a folder (e.g., ```'c:/github/bayesFit'```)
+1. Add the folder to your Matlab path (```addpath('c:/github/bayesFut')```)
+1. Use ```bayesFit(x,y,...)``` (see ```help bayesFit```)
 
 ## Test
 
-On the Matlab Command line, go to the test folder (```cd c:/github/bayesPhys/test```)
+On the Matlab Command line, go to the test folder (```cd c:/github/bayesFit/test```)
 
 1. Tuning Curve Estimation.
 Run the script ```'test_tc_sample.m'```. This script contains code for estimating the parameters of a circular gaussian tuning curve from simulated data (see Fig 2B and Fig 3 in the paper). Code for estimating a cosine tuning curve is commented out (lines 9-12).
