@@ -1,14 +1,12 @@
 # bayesFit
 
-This is a Git repository for the bayesPhys package created by Ian Stevenson and Beau Cronin and published in 2010.
-
 This code package performs fully Bayesian estimation of parametric tuning curves with various noise models, and contains examples for model comparison and hypothesis testing. It accompanies the following paper:
 
 Hierarchical Bayesian modeling and Markov chain Monte Carlo sampling for tuning curve analysis (2010)
 Cronin B*, Stevenson IH*, Sur M, and Körding KP. Journal of Neurophysiology 103: 591-602.
 <http://jn.physiology.org/cgi/content/abstract/103/1/591>
 
-Wrapped in a GitHub repository and updated with a few cosmetic changes to avoid namespace issues by Bart Krekelberg.
+Bart Krekelberg created this git repository and added some wrapper code and namespace protectio for  the original (java-based) bayesPhys package created by Ian Stevenson and Beau Cronin.
 
 ## Installation
 
