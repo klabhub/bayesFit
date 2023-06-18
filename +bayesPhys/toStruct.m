@@ -25,5 +25,5 @@ end
 m.log_prior= tbx.log_prior;
 m.log_llhd = tbx.log_llhd;
 m.log_post = tbx.log_post;
-
+m.opts = tbx.opts;
 end

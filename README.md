@@ -11,8 +11,8 @@ Bart Krekelberg created this git repository and added some wrapper code and name
 ## Installation
 
 1. Clone the repository from GitHub to a folder (e.g., ```'c:/github/bayesFit'```)
-1. Add the folder to your Matlab path (```addpath('c:/github/bayesFut')```)
-1. Use ```bayesFit.fit(x,y,...)``` (see ```help bayesFit.fit```)
+1. Add the folder to your Matlab path (```addpath('c:/github/bayesFit')```)
+1. Use ```bayesFit(x,y,...)``` (see ```help bayesFit.fit```)
 
 ## Test
 

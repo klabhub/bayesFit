@@ -35,18 +35,18 @@ switch lower(tc_func_name)
    otherwise
        error(['The TC function ',tc_func_name,' is not recognized']);
 end
+end
 
 function  y=cg(x,b,a,po,tw,P)
     if nargin==5, P=360; end
-    y=zeros(size(x));
-    for i=1:length(x(:))
-        y(i)=b;
-        for j=-4:4
-            y(i)=y(i)+a*exp(-(x(i)-po-j*P)^2 / (2*tw^2));
-        end
-    end
-    
+     y=b* ones(size(x));
+     for j=-4:4
+        y=y+a*exp(-(x-po-j*P).^2 / (2*tw^2));
+     end
+end
+
 function y=cg_dir(x,b,a1,po,tw,a2)
     y=b*ones(size(x));
     y=y+cg(x,0,a1,po,tw,360);
     y=y+cg(x,0,a2,po+180,tw,360);
+end

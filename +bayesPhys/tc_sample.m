@@ -59,10 +59,11 @@ switch lower(tc_func_name)
     case 'constant'
         TCModelUtils.configureTCFunc(sdk, 'Constant');
         if constrain_positive==1
-            setup_prior(sdk,1,'uniform',mean(y),0,max_y*2,opts);
+            opts.prior(1) = setup_prior(sdk,1,'uniform',mean(y),0,max_y*2,opts);
         else
-            setup_prior(sdk,1,'uniform',mean(y),min_y-spread,max_y+spread,opts);
+            opts.prior(1) =  setup_prior(sdk,1,'uniform',mean(y),min_y-spread,max_y+spread,opts);
         end
+
     case 'linear'
         TCModelUtils.configureTCFunc(sdk, 'Linear');
         setup_prior(sdk,1,'uniform',mean(y),min_y,max_y,opts);
@@ -99,11 +100,11 @@ switch lower(tc_func_name)
         setup_prior(sdk,4,'uniform',min_x_diff,min_x_diff/2,90,opts);
     case 'direction_selective_circular_gaussian'
         TCModelUtils.configureTCFunc(sdk, 'DirectionSelectiveCircularGaussian');
-        setup_prior(sdk,1,'uniform',5,0,100,opts);
-        setup_prior(sdk,2,'uniform',5,0,100,opts);
-        setup_prior(sdk,3,'uniform',90,0,180,opts);
-        setup_prior(sdk,4,'uniform',min_x_diff,min_x_diff/2,90,opts);
-        setup_prior(sdk,5,'uniform',5,0,100,opts);
+                    opts.prior(1) = setup_prior(sdk,1,'uniform',5,0,100,opts);
+                    opts.prior(2) = setup_prior(sdk,2,'uniform',5,0,100,opts);
+                    opts.prior(3) = setup_prior(sdk,3,'uniform',90,0,180,opts);
+                    opts.prior(4) = setup_prior(sdk,4,'uniform',min_x_diff,min_x_diff/2,90,opts);
+                    opts.prior(5) = setup_prior(sdk,5,'uniform',5,0,100,opts);
         collect_p5 = 1;
     case 'sigmoid'
         TCModelUtils.configureTCFunc(sdk, 'Sigmoid');
@@ -215,10 +216,10 @@ end
 S.log_prior=WalkUtils.getPriorValues(observer);
 S.log_llhd=WalkUtils.getLlhdValues(observer);
 S.log_post=S.log_prior+S.log_llhd;
+S.opts =opts;
 
 
-
-function setup_prior(sdk, paramnum, priortype, initval, hp1, hp2, opts)
+function opts = setup_prior(sdk, paramnum, priortype, initval, hp1, hp2, opts)
 % Import Java
 import edu.mit.bcs.bayesphys.models.tc.*
 import edu.mit.bcs.bayesphys.models.util.*
@@ -240,3 +241,4 @@ switch priortype
         TCModelUtils.setupParameterWithNormalPrior(sdk,paramnum,initval,hp1,hp2);
         
 end
+opts  = struct('type',priortype,'hp1',hp1,'hp2',hp2,'initval',initval);
