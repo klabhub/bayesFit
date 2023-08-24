@@ -1,4 +1,4 @@
-function  [r,bootParms,bf] = splitHalves(x,y,pv)
+function  [r,bf,parms,parmsError] = splitHalves(x,y,pv)
 % Asess performance by comparing parameter estimates based on
 % split halves of the data.
 % If the estimation of the rate is successful then identical
@@ -68,9 +68,11 @@ for i=1:pv.nrBoot
 end
 
 r = mean(r);
-bf =mean(bf);
-if nargout>1
-    bootParms = cat(3,bootParmsOne,bootParmsOther);
+bf =mean(bf(:));
+if nargout>2
+    bp = cat(2,bootParmsOne,bootParmsOther);
+    parms =mean(bp,2);
+    parmsError = std(bp,0,2);
 end
 
 end
