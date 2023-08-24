@@ -12,8 +12,6 @@ import bayesPhys.*
 % V1 Example
 params = [1 4];
 tc_func_name = 'linear';
-params = [1 4 0.001 10];
-tc_func_name = 'sigmoid';
 noise_model_name = 'add_normal';
 x0 = linspace(-1,1,10);
 

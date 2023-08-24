@@ -94,13 +94,8 @@ if  pv.graphics
      %  Median per x.
     [uX,~,xIx]=unique(x);
     m = accumarray(xIx,y,[],@(x) median(x,1));
-    plot(uX,m,'b*','MarkerSize',15)
-    
-
-    
+    plot(uX,m,'b*','MarkerSize',15)    
     xlabel 'X'
-
-
     title (['Bayes Fit : ' strrep(pv.fun,'_',' ') ': (' num2str(results.median,3) '), BF (vs ' pv.compare    ') : ' num2str(results.bf,3)]);
 end
 

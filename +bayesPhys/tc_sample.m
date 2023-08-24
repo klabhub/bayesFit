@@ -220,6 +220,7 @@ S.opts =opts;
 
 
 function opts = setup_prior(sdk, paramnum, priortype, initval, hp1, hp2, opts)
+import bayesPhys.*
 % Import Java
 import edu.mit.bcs.bayesphys.models.tc.*
 import edu.mit.bcs.bayesphys.models.util.*
